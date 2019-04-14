@@ -49,14 +49,6 @@ app.get('/payment', (req, res) => {
     res.render('/payment', { account: accounts.credit });
 });
 
-app.post('/payment', (req, res) => {
-    accounts.credit.balance -= req.body.amount;
-    accounts.credit.available += parseInt(req.body.amount, 10);
-    const accountsJSON = JSON.stringify(accounts, null, 4);
-    fs.writeFileSync(path.join(__dirname, 'accounts.json'), accountsJSON, 'utf8');
-    res.render('/payment', { message: 'Payment Completed'});
-});
-
 app.get('/profile', (req, res) => {
     res.render('profile', {user: users[0] });
 });
